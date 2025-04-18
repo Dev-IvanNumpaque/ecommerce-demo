@@ -43,11 +43,66 @@ export const Home = () => {
   ];
 
   return (
-    <Box bg={useColorModeValue('gray.50', 'gray.900')} minH="100vh" py={12}>
-      <Container maxW="container.xl">
-        <Heading 
-          mb={4} 
-          fontSize={{ base: '3xl', md: '4xl' }}
+    <Box>
+      <Box
+        as="section"
+        h="70vh"
+        position="relative"
+        backgroundImage="url('/adidas-originals-9516-1367152-1-zoom.webp')"
+        backgroundSize="cover"
+        backgroundPosition="center"
+      >
+        <Box
+          position="absolute"
+          top={0}
+          left={0}
+          right={0}
+          bottom={0}
+          bg="blackAlpha.600"
+        />
+        <Container
+          maxW="container.xl"
+          h="full"
+          position="relative"
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          color="white"
+        >
+          <Heading
+            fontSize={{ base: '4xl', md: '6xl' }}
+            fontWeight="bold"
+            mb={4}
+          >
+            AKJ - Tu Tienda de Moda
+          </Heading>
+          <Text
+            fontSize={{ base: 'xl', md: '2xl' }}
+            maxW="lg"
+            mb={8}
+          >
+            Descubre nuestra exclusiva colección de calzado deportivo y casual en AKJ
+          </Text>
+          <Box
+            as="button"
+            px={8}
+            py={4}
+            bg="teal.500"
+            rounded="lg"
+            fontWeight="semibold"
+            width="fit-content"
+            _hover={{ bg: 'teal.600' }}
+            transition="all 0.2s"
+          >
+            Ver Productos
+          </Box>
+        </Container>
+      </Box>
+      <Box bg={useColorModeValue('gray.50', 'gray.900')} py={12}>
+        <Container maxW="container.xl">
+          <Heading 
+            mb={4} 
+            fontSize={{ base: '3xl', md: '4xl' }}
           textAlign="center"
           color={useColorModeValue('gray.900', 'white')}
         >
@@ -74,6 +129,7 @@ export const Home = () => {
         ))}
       </Grid>
       </Container>
+    </Box>
     </Box>
   );
 };

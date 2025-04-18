@@ -15,11 +15,18 @@ export const theme = extendTheme({
       },
     }),
   },
+  breakpoints: {
+    sm: '320px',
+    md: '768px',
+    lg: '960px',
+    xl: '1200px',
+    '2xl': '1536px',
+  },
   components: {
     Button: {
       defaultProps: {
         colorScheme: 'teal',
-        size: 'md',
+        size: { base: 'sm', md: 'md' },
       },
       variants: {
         solid: (props: any) => ({
@@ -31,6 +38,8 @@ export const theme = extendTheme({
             boxShadow: 'lg',
           },
           transition: 'all 0.2s',
+          width: { base: '100%', sm: 'auto' },
+          fontSize: { base: 'sm', md: 'md' },
         }),
       },
     },
@@ -38,17 +47,22 @@ export const theme = extendTheme({
       baseStyle: {
         fontWeight: 'bold',
         letterSpacing: '-0.02em',
+        fontSize: { base: 'xl', sm: '2xl', md: '3xl', lg: '4xl' },
+        textAlign: { base: 'center', md: 'left' },
       },
     },
     Text: {
       baseStyle: {
         lineHeight: 'tall',
+        fontSize: { base: 'sm', md: 'md' },
+        textAlign: { base: 'center', md: 'left' },
       },
     },
     Container: {
       baseStyle: {
-        px: { base: 4, md: 8 },
-        py: { base: 4, md: 8 },
+        px: { base: 4, md: 6, lg: 8 },
+        py: { base: 4, md: 6, lg: 8 },
+        maxW: { base: '100%', md: '90%', lg: '1200px' },
       },
     },
   },
