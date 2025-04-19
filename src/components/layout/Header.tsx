@@ -13,7 +13,7 @@ export const Header = () => {
   const navItems = [
     { name: 'Inicio', path: '/', icon: FaHome },
     { name: 'Productos', path: '/productos', icon: FaShoppingBag },
-    { name: 'Carrito', path: '/carrito', icon: FaShoppingCart },
+    { name: 'Carrito', path: '/cart', icon: FaShoppingCart },
     { name: 'Favoritos', path: '/favoritos', icon: FaHeart },
   ];
 

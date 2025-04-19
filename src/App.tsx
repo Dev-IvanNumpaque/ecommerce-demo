@@ -2,6 +2,12 @@ import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/layout/Layout';
 import { Home } from './pages/Home';
+import { Products } from './pages/Products';
+import { Cart } from './pages/Cart';
+import { ProductDetail } from './pages/ProductDetail';
+import { Checkout } from './pages/Checkout';
+import { Auth } from './pages/Auth';
+import { Favorites } from './pages/Favorites';
 import { theme } from './theme';
 
 function App() {
@@ -12,6 +18,12 @@ function App() {
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/productos" element={<Products />} />
+            <Route path="/producto/:id" element={<ProductDetail />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/favoritos" element={<Favorites />} />
           </Routes>
         </Layout>
       </Router>

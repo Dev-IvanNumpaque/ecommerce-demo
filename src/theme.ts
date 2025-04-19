@@ -13,6 +13,7 @@ export const theme = extendTheme({
         bg: props.colorMode === 'light' ? 'gray.50' : 'gray.900',
         color: props.colorMode === 'light' ? 'gray.800' : 'whiteAlpha.900',
       },
+
     }),
   },
   breakpoints: {
@@ -32,10 +33,12 @@ export const theme = extendTheme({
         solid: (props: any) => ({
           bg: props.colorMode === 'light' ? 'teal.500' : 'teal.200',
           color: props.colorMode === 'light' ? 'white' : 'gray.800',
+
           _hover: {
             bg: props.colorMode === 'light' ? 'teal.600' : 'teal.300',
             transform: 'translateY(-2px)',
             boxShadow: 'lg',
+  
           },
           transition: 'all 0.2s',
           width: { base: '100%', sm: 'auto' },
@@ -63,6 +66,9 @@ export const theme = extendTheme({
         px: { base: 4, md: 6, lg: 8 },
         py: { base: 4, md: 6, lg: 8 },
         maxW: { base: '100%', md: '90%', lg: '1200px' },
+        borderWidth: '3px',
+        borderStyle: 'solid',
+        borderColor: 'black',
       },
     },
   },
