@@ -6,7 +6,9 @@ import { Products } from './pages/Products';
 import { Cart } from './pages/Cart';
 import { ProductDetail } from './pages/ProductDetail';
 import { Checkout } from './pages/Checkout';
-import { Auth } from './pages/Auth';
+import { Login } from './pages/Login';
+import { Register } from './pages/Register';
+import { Profile } from './pages/Profile';
 import { Favorites } from './pages/Favorites';
 import { theme } from './theme';
 
@@ -22,7 +24,9 @@ function App() {
             <Route path="/producto/:id" element={<ProductDetail />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
-            <Route path="/auth" element={<Auth />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/favoritos" element={<Favorites />} />
           </Routes>
         </Layout>

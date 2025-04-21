@@ -1,7 +1,7 @@
-import { Box, Container, Flex, IconButton, useColorMode, useColorModeValue, Drawer, DrawerBody, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure, VStack, Text, useBreakpointValue } from '@chakra-ui/react';
+import { Box, Container, Flex, IconButton, useColorMode, useColorModeValue, Drawer, DrawerBody, DrawerHeader, DrawerOverlay, DrawerContent, DrawerCloseButton, useDisclosure, VStack, Text, useBreakpointValue, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
 import { MoonIcon, SunIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { Link as RouterLink } from 'react-router-dom';
-import { FaHome, FaShoppingBag, FaShoppingCart, FaHeart } from 'react-icons/fa';
+import { FaHome, FaShoppingBag, FaShoppingCart, FaHeart, FaUser } from 'react-icons/fa';
 
 export const Header = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -70,6 +70,30 @@ export const Header = () => {
                   transition="all 0.2s"
                 />
               ))}
+              <Menu>
+                <MenuButton
+                  as={IconButton}
+                  icon={<Box as={FaUser} boxSize={4} />}
+                  variant="ghost"
+                  size="sm"
+                  aria-label="Usuario"
+                  _hover={{
+                    bg: useColorModeValue('teal.50', 'teal.900'),
+                    color: useColorModeValue('teal.600', 'teal.200'),
+                    transform: 'translateY(-2px)',
+                  }}
+                  _active={{
+                    bg: useColorModeValue('teal.100', 'teal.800'),
+                    transform: 'translateY(0)',
+                  }}
+                  transition="all 0.2s"
+                />
+                <MenuList>
+                  <MenuItem as={RouterLink} to="/login">Iniciar Sesión</MenuItem>
+                  <MenuItem as={RouterLink} to="/register">Registrarse</MenuItem>
+                  <MenuItem as={RouterLink} to="/profile">Mi Perfil</MenuItem>
+                </MenuList>
+              </Menu>
             </Flex>
           )}
         </Flex>
@@ -101,6 +125,22 @@ export const Header = () => {
                   </Flex>
                 </Box>
               ))}
+              <Box
+                as={RouterLink}
+                to="/login"
+                onClick={onClose}
+                p={2}
+                borderRadius="md"
+                _hover={{
+                  bg: useColorModeValue('teal.50', 'teal.900'),
+                  color: useColorModeValue('teal.600', 'teal.200'),
+                }}
+              >
+                <Flex align="center" gap={3}>
+                  <Box as={FaUser} />
+                  <Text>Mi Cuenta</Text>
+                </Flex>
+              </Box>
             </VStack>
           </DrawerBody>
         </DrawerContent>

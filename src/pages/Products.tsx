@@ -12,8 +12,7 @@ import {
   RangeSliderTrack,
   RangeSliderFilledTrack,
   RangeSliderThumb,
-  Flex,
-  Badge,
+
   IconButton,
 } from '@chakra-ui/react';
 import { useState } from 'react';

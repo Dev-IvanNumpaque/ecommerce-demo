@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Container, Stack, Heading, FormControl, FormLabel, Input, Button, Text, useToast, Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
+import { Box, Container, Stack, Heading, FormControl, FormLabel, Input, Button, useToast, Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 
 export const Auth = () => {
   const toast = useToast();

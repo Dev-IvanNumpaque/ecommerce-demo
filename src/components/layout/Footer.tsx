@@ -1,4 +1,5 @@
-import { Box, Container, Flex, Link, Stack, Text, IconButton } from '@chakra-ui/react';
+import { Box, Container, Flex, Link as ChakraLink, Stack, Text, IconButton } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
 
 export const Footer = () => {
@@ -38,7 +39,7 @@ export const Footer = () => {
               Enlaces Rápidos
             </Text>
             {quickLinks.map((link) => (
-              <Link key={link.url} href={link.url}>
+              <Link key={link.url} to={link.url} style={{ textDecoration: 'none' }}>
                 {link.label}
               </Link>
             ))}
@@ -52,7 +53,7 @@ export const Footer = () => {
               {socialLinks.map((social) => (
                 <IconButton
                   key={social.label}
-                  as={Link}
+                  as={ChakraLink}
                   href={social.url}
                   aria-label={social.label}
                   icon={<social.icon />}

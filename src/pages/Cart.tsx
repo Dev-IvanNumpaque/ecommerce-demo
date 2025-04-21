@@ -1,5 +1,5 @@
 import { Box, Button, Flex, Heading, Table, Tbody, Td, Text, Th, Thead, Tr, useToast } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 type CartItem = {
   id: number;
