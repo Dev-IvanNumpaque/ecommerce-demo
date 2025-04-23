@@ -1,4 +1,4 @@
-import { query, QueryResult } from '../config/db';
+import { apiRequest } from '../config/db';
 
 export interface Product {
   id: number;
@@ -15,36 +15,28 @@ export interface Product {
 
 export const ProductModel = {
   async getAll(): Promise<Product[]> {
-    const result: QueryResult<Product> = await query('SELECT * FROM products');
-    return result?.rows ?? [];
+    const response = await apiRequest<Product[]>('/products', 'GET');
+    return response.data ?? [];
   },
 
   async getById(id: number): Promise<Product | null> {
-    const result: QueryResult<Product> = await query('SELECT * FROM products WHERE id = $1', [id]);
-    return result?.rows[0] ?? null;
+    const response = await apiRequest<Product>(`/products/${id}`, 'GET');
+    return response.data ?? null;
   },
 
   async create(product: Omit<Product, 'id'>): Promise<Product> {
-    const result: QueryResult<Product> = await query(
-      'INSERT INTO products (name, brand, price, description, image, sizes, colors, category, style) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *',
-      [product.name, product.brand, product.price, product.description, product.image, product.sizes, product.colors, product.category, product.style]
-    );
-    if (!result?.rows[0]) throw new Error('Failed to create product');
-    return result.rows[0];
+    const response = await apiRequest<Product>('/products', 'POST', product);
+    if (!response.data) throw new Error('Failed to create product');
+    return response.data;
   },
 
   async update(id: number, product: Partial<Product>): Promise<Product | null> {
-    const fields = Object.keys(product).map((key, index) => `${key} = $${index + 2}`).join(', ');
-    const values = Object.values(product);
-    const result: QueryResult<Product> = await query(
-      `UPDATE products SET ${fields} WHERE id = $1 RETURNING *`,
-      [id, ...values]
-    );
-    return result?.rows[0] ?? null;
+    const response = await apiRequest<Product>(`/products/${id}`, 'PUT', product);
+    return response.data ?? null;
   },
 
   async delete(id: number): Promise<boolean> {
-    const result: QueryResult = await query('DELETE FROM products WHERE id = $1', [id]);
-    return (result?.rowCount ?? 0) > 0;
+    const response = await apiRequest<{ success: boolean }>(`/products/${id}`, 'DELETE');
+    return response.data ?? false;
   }
 };

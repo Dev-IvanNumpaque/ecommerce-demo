@@ -20,10 +20,18 @@ export const useProductStore = create<ProductStore>((set) => ({
   fetchProducts: async () => {
     set({ loading: true, error: null });
     try {
+      console.log('Iniciando fetchProducts...');
       const products = await ProductModel.getAll();
+      console.log('Productos obtenidos:', products);
+      if (!products || products.length === 0) {
+        console.log('No se encontraron productos');
+        set({ error: 'No se encontraron productos en la base de datos', loading: false });
+        return;
+      }
       set({ products, loading: false });
     } catch (error) {
-      set({ error: 'Error al cargar los productos', loading: false });
+      console.error('Error en fetchProducts:', error);
+      set({ error: `Error al cargar los productos: ${error instanceof Error ? error.message : 'Error desconocido'}`, loading: false });
     }
   },
 
