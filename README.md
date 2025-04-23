@@ -17,6 +17,8 @@
 - 🔄 Vite para desarrollo rápido
 - 🛣️ React Router para navegación
 - 🎭 Tema personalizado y modos de color
+- 🖥️ Express para el servidor backend
+- 🗄️ PostgreSQL para la base de datos
 
 ## 📦 Instalación
 
@@ -37,7 +39,9 @@ npm run dev
 
 ## 🔧 Scripts Disponibles
 
-- `npm run dev` - Inicia el servidor de desarrollo
+- `npm run dev` - Inicia el servidor de desarrollo frontend
+- `npm run server` - Inicia el servidor backend
+- `npm run dev:full` - Inicia tanto el frontend como el backend simultáneamente
 - `npm run build` - Construye la aplicación para producción
 - `npm run preview` - Vista previa de la versión de producción
 
@@ -45,8 +49,23 @@ npm run dev
 
 - `/src/components` - Componentes reutilizables
 - `/src/pages` - Páginas de la aplicación
+- `/src/services` - Servicios para comunicación con la API
+- `/src/models` - Interfaces y modelos de datos
 - `/src/theme.ts` - Configuración del tema
 - `/src/assets` - Recursos estáticos
+- `/server` - Servidor backend con Express
+
+## 🔄 Solución al Error de Conexión a PostgreSQL
+
+Se ha implementado una arquitectura cliente-servidor para resolver el error de conexión directa a PostgreSQL desde el frontend. El error ocurría porque el módulo `pg.js` de Vite intentaba importar `cloudflare:sockets`, lo cual no es posible en un entorno de navegador.
+
+La solución implementada consiste en:
+
+1. Crear un servidor backend con Express que maneja la conexión a PostgreSQL
+2. Modificar el frontend para comunicarse con el backend a través de una API REST
+3. Actualizar la configuración de Vite para usar un proxy que redirija las peticiones a la API
+
+Para ejecutar correctamente el proyecto, asegúrate de usar `npm run dev:full` para iniciar tanto el frontend como el backend.
 
 ## 🤝 Contribución
 

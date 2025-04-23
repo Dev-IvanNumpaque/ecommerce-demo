@@ -5,36 +5,38 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   define: {
     'process.env': JSON.stringify({
-      VITE_DB_USER: process.env.VITE_DB_USER,
-      VITE_DB_HOST: process.env.VITE_DB_HOST,
-      VITE_DB_NAME: process.env.VITE_DB_NAME,
-      VITE_DB_PASSWORD: process.env.VITE_DB_PASSWORD,
-      VITE_DB_PORT: process.env.VITE_DB_PORT,
+      VITE_API_URL: process.env.VITE_API_URL,
       NODE_ENV: process.env.NODE_ENV
     }),
     global: 'globalThis'
   },
   plugins: [react()],
   optimizeDeps: {
-    exclude: ['@mapbox/node-pre-gyp', 'mock-aws-s3', 'aws-sdk', 'nock', 'pg-native']
+    include: ['axios'],
+    exclude: ['bcrypt', '@mapbox/node-pre-gyp']
   },
   build: {
     commonjsOptions: {
       esmExternals: true
-    },
-    rollupOptions: {
-      external: ['@mapbox/node-pre-gyp', 'mock-aws-s3', 'aws-sdk', 'nock']
     }
   },
   resolve: {
-    alias: {
-      pg: 'pg-browser',
-      'pg-native': 'pg-browser'
-    }
+    alias: {}
+  },
+  ssr: {
+    // Lista de dependencias que no deben ser transformadas para SSR
+    noExternal: ['bcrypt', '@mapbox/node-pre-gyp', 'mock-aws-s3', 'aws-sdk', 'nock']
   },
   server: {
     watch: {
       usePolling: true
+    },
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+        secure: false
+      }
     }
   }
 })

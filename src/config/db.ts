@@ -1,57 +1,24 @@
-import { Pool, QueryResult as PgQueryResult } from 'pg';
-import { executeQuery } from '../services/api';
+import { Pool } from 'pg';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+export const pool = new Pool({
+  user: process.env.PGUSER,
+  host: process.env.PGHOST,
+  database: process.env.PGDATABASE,
+  password: process.env.PGPASSWORD,
+  port: parseInt(process.env.PGPORT || '5432'),
+  ssl: process.env.PGSSL === 'true' ? { 
+    rejectUnauthorized: false 
+  } : false
 });
 
-export type QueryResult<T> = PgQueryResult<T>;
-
-export const query = async <T = any>(text: string, params: any[] = []): Promise<PgQueryResult<T>> => {
+export const query = async (text: string, params?: any[]) => {
   try {
-    const start = Date.now();
-    const res = await pool.query<T>(text, params);
-    const duration = Date.now() - start;
-    console.log('Executed query', { text, duration, rows: res.rowCount });
-    return res;
+    return await pool.query(text, params);
   } catch (error) {
-    console.error('Database query error:', error);
+    console.error('Error ejecutando consulta:', error);
     throw error;
   }
 };
-
-type ApiResponse<T = any> = {
-  data: T | null;
-  status: number;
-  message?: string;
-  error?: string;
-};
-
-export const apiRequest = async <T = any>(
-  endpoint: string,
-  method: 'GET' | 'POST' | 'PUT' | 'DELETE' = 'GET',
-  data?: any
-): Promise<ApiResponse<T>> => {
-  try {
-    const result = await executeQuery<T>(endpoint, method, data);
-    return {
-      data: result,
-      status: 200,
-      message: 'Success'
-    };
-  } catch (error: any) {
-    console.error('API request failed:', error.message);
-    return {
-      data: null,
-      status: error.status || 500,
-      error: error.message || 'An unexpected error occurred'
-    };
-  }
-};
-
-export type { ApiResponse };
-export { pool };
