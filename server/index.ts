@@ -129,6 +129,22 @@ app.post('/api/auth/login', async (req, res) => {
   }
 });
 
+// Ruta raíz
+app.get('/', (req, res) => {
+  res.json({
+    mensaje: 'Bienvenido a la API de E-commerce',
+    versión: '1.0.0',
+    endpoints: {
+      productos: '/api/products',
+      producto: '/api/products/:id',
+      clientes: '/api/customers',
+      órdenes: '/api/orders',
+      registro: '/api/auth/register',
+      login: '/api/auth/login'
+    }
+  });
+});
+
 // Iniciar servidor
 app.listen(PORT, () => {
   console.log(`Servidor ejecutándose en http://localhost:${PORT}`);
