@@ -24,7 +24,7 @@
 
 1. Clona el repositorio:
 ```bash
-git clone [url-del-repositorio]
+git clone https://github.com/Dev-IvanNumpaque/ecommerce-demo.git
 ```
 
 2. Instala las dependencias:
